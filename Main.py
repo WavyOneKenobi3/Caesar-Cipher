@@ -2,7 +2,7 @@ from alphabet import alphabet
 
 
 while True:
-    direction = input("Type 'encode' to encrypt, type 'decode' to decrpyt:\n").lower()
+    direction = input("Type 'encode' to encrypt or'decode' to decrpyt: ").lower()
     text = input("type your message:\n").lower().strip()
     shift = int(input("Type the shift number:\n"))
 
@@ -33,7 +33,16 @@ while True:
      
     if direction == "encode":
         encrypt(plain_text=text, amount_shift=shift)
-    elif direction == "decode"
+        keep_going = input("Do you wish to continue? Yes - continue, NO - quit").lower()
+        if keep_going == "yes":
+            continue
+        elif keep_going == "no":
+            break
+    elif direction == "decode":
         decrypt(crypted_text=text, shifted_amount=shift)
+        keep_going = input("Do you wish to continue? Yes - continue, NO - quit").lower()
+        if keep_going == "yes":
+            continue
+        elif keep_going == "no":
+            break
     
-    #break while loop
