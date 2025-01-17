@@ -2,47 +2,26 @@ from alphabet import alphabet
 
 
 while True:
-    direction = input("Type 'encode' to encrypt or'decode' to decrpyt: ").lower()
-    text = input("type your message:\n").lower().strip()
+    direction = input("Type 'encode' to encrypt or 'decode' to decrypt: ").lower()
+    text = input("Type your message:\n").lower().strip()
     shift = int(input("Type the shift number:\n"))
 
-    def encrypt(plain_text, amount_shift):
+    def caesar(text, shift, direction):
         cipher_text = ""
-        for let in plain_text:
-            if let in alphabet:                             #checks if nay space or punctuatuion
+        if direction == "decode":
+            shift *= -1  # Reverse the shift for decoding
+        for let in text:
+            if let in alphabet:  # Check if the character is in the alphabet
                 position = alphabet.index(let)
-                new_pos = position + amount_shift
-                new_let = alphabet[new_pos]
-                cipher_text += new_let
+                new_pos = position + shift
+                cipher_text += alphabet[new_pos]
             else:
-                cipher_text += let              
-        print(f"The encoded text is {cipher_text}")   
-            
+                cipher_text += let
+        print(f"The {direction}d text is: {cipher_text}")
 
-    def decrypt(crypted_text, shifted_amount):
-        cipher_text = ""
-        for let in crypted_text:
-            if let in alphabet:                             #checks if nay space or punctuatuion
-                position = alphabet.index(let)
-                new_pos = position - shifted_amount
-                new_let = alphabet[new_pos]
-                cipher_text += new_let
-            else:
-                cipher_text += let              
-        print(f"The decode text is {cipher_text}")
-     
-    if direction == "encode":
-        encrypt(plain_text=text, amount_shift=shift)
-        keep_going = input("Do you wish to continue? Yes - continue, NO - quit").lower()
-        if keep_going == "yes":
-            continue
-        elif keep_going == "no":
-            break
-    elif direction == "decode":
-        decrypt(crypted_text=text, shifted_amount=shift)
-        keep_going = input("Do you wish to continue? Yes - continue, NO - quit").lower()
-        if keep_going == "yes":
-            continue
-        elif keep_going == "no":
-            break
-    
+    # Call the function before asking if the user wants to continue
+    caesar(text=text, shift=shift, direction=direction)
+
+    keep_going = input("Do you wish to continue? Yes - continue, No - quit: ").lower()
+    if keep_going == "no":
+        break
